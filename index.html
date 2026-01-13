@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,6 +35,167 @@
             font-size: 2.5em;
             font-weight: bold;
             color: #333;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+        }
+        
+        .input-section {
+            margin-bottom: 25px;
+        }
+        
+        .url-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: border-color 0.3s;
+        }
+        
+        .url-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .open-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .open-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .buttons-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .app-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+        
+        .youtube-btn {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+        }
+        
+        .fileexplorer-btn {
+            background: linear-gradient(135deg, #ff9500 0%, #ff7300 100%);
+        }
+        
+        .shareme-btn {
+            background: linear-gradient(135deg, #00c853 0%, #00a844 100%);
+        }
+        
+        .app-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .divider {
+            margin: 25px 0;
+            height: 1px;
+            background: #eee;
+            position: relative;
+        }
+        
+        .divider-text {
+            background: white;
+            padding: 0 15px;
+            color: #999;
+            font-size: 12px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">FRPLINKOPEN</div>
+        <div class="subtitle">made by @drobeled</div>
+        
+        <div class="input-section">
+            <input type="text" class="url-input" id="urlInput" placeholder="Enter link to open...">
+            <button class="open-btn" onclick="openCustomLink()">Open Link</button>
+        </div>
+        
+        <div class="divider">
+            <span class="divider-text">OR</span>
+        </div>
+        
+        <div class="buttons-section">
+            <button class="app-btn youtube-btn" onclick="openYoutube()">YouTube</button>
+            <button class="app-btn fileexplorer-btn" onclick="openFileExplorer()">MI File Explorer</button>
+            <button class="app-btn shareme-btn" onclick="openShareMe()">ShareMe</button>
+        </div>
+    </div>
+
+    <script>
+        function openCustomLink() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (url) {
+                window.open(url, '_blank');
+            } else {
+                alert('Please enter a link');
+            }
+        }
+        
+        function openYoutube() {
+            window.location.href = 'intent://com.google.android.youtube/#Intent;scheme=android-app;end';
+        }
+        
+        function openFileExplorer() {
+            window.location.href = 'intent://com.mi.android.globalfileexplorer/#Intent;scheme=android-app;end';
+        }
+        
+        function openShareMe() {
+            window.location.href = 'intent://com.xiaomi.midrop/#Intent;scheme=android-app;end';
+        }
+        
+        document.getElementById('urlInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                openCustomLink();
+            }
+        });
+        
+        document.getElementById('urlInput').addEventListener('blur', function() {
+            let url = this.value.trim();
+            if (url && !url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('intent://')) {
+                if (url.includes('://')) {
+                    return;
+                }
+                this.value = 'https://' + url;
+            }
+        });
+    </script>
+</body>
+</html>            color: #333;
             margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 2px;
